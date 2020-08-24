@@ -1,0 +1,21 @@
+li span.todo-list-item{
+    margin-right: auto;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 18px;
+}
+.deadlineBtn{
+    margin-left: 5px;
+    color: green;
+}
+.finish-time{
+    color: #6c757d;
+    font-size: 12px;
+    margin-left: 5px;
+    line-height: 18px;
+    visibility: hidden;
+    font-weight: normal;
+}
+li:hover .finish-time{
+    visibility: visible;
+}

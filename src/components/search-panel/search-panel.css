@@ -1,0 +1,18 @@
+.filter-block{
+    display: flex;
+    margin: 15px 0;
+}
+.filter-block input{
+    margin-right: 3px;
+}
+.filter-block button{
+    border-radius: 0;
+}
+.filter-block button:first-of-type{
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}
+.filter-block button:last-of-type{
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}

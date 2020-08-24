@@ -1,0 +1,5 @@
+.todo-list .list-group-item{
+    padding: 5px 10px 5px 30px;
+    display: flex;
+    justify-content: flex-end;
+}

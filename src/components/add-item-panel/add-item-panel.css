@@ -1,0 +1,17 @@
+.add-block{
+    display: flex;
+    margin: 15px 0;
+}
+.add-block input{
+    margin-right: 3px;
+}
+.add-block button{
+    white-space: nowrap;
+    padding: 0 25px;
+}
+.add-block input[type="datetime-local"] {
+    width: 52px;
+    text-align: center;
+    /* font-size: 16px; */
+    padding: 0;
+}

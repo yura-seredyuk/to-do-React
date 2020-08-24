@@ -1,0 +1,13 @@
+.appHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.appHeader{
+    margin-bottom: 0;
+}
+.appHeader .counter{
+    font-weight: 500;
+    font-size: 18px;
+    color: #6c757d;
+}
