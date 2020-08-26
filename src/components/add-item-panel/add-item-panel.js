@@ -8,7 +8,7 @@ const AddItemPanel = ()=>{
     }
     const today = new Date().toISOString().substr(0, 16);
     return (
-        <div className="add-block">
+        <form className="add-block">
             <input 
                 type = 'text'
                 placeholder = {searchText}
@@ -21,7 +21,7 @@ const AddItemPanel = ()=>{
                 min = {today}
             />
             <button type="button" className="btn btn-outline-secondary">Add Item</button>
-        </div>   
+        </form>   
     )
 }
 

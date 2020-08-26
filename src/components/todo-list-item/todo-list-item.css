@@ -19,3 +19,6 @@ li span.todo-list-item{
 li:hover .finish-time{
     visibility: visible;
 }
+.todo-list-item.done .todo-list-item-label{
+    text-decoration: line-through;
+}
