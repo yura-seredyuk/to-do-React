@@ -22,3 +22,8 @@ li:hover .finish-time{
 .todo-list-item.done .todo-list-item-label{
     text-decoration: line-through;
 }
+
+.todo-list-item.important .todo-list-item-label{
+    color: #3472CD;
+    font-weight: 700;
+}

@@ -13,8 +13,8 @@ const TodoListItemRemove = ({onDelete})=>{
         type="button" 
         style={style} 
         className="btn btn-outline-danger"
-        onClick = {onDelete}
-        ><FontAwesomeIcon icon={faTrashAlt} /></button>
+        onClick = {onDelete}>
+            <FontAwesomeIcon icon={faTrashAlt} /></button>
 }
 
 export default TodoListItemRemove;
