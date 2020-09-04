@@ -6,12 +6,9 @@ import SearchPanel from '../search-panel';
 import ItemStatusFilter from '../item-status-filter';
 import AddItemPanel from '../add-item-panel';
 
-
-
 import './app.css';
 
 import 'font-awesome/css/font-awesome.min.css';
-
 
 export default class App extends Component{
     maxId = 1;
@@ -20,7 +17,9 @@ export default class App extends Component{
             this.createTodoItem('Drink Coffee','2020-09-15T13:00'),
             this.createTodoItem('Build React App','2020-09-15T13:00'),
             this.createTodoItem('Drink Tea','2020-09-15T13:00')
-        ]
+        ],
+        term:'',
+        filter:'all'
     }
     createTodoItem(label,deadline){
         return{
@@ -78,30 +77,53 @@ export default class App extends Component{
             }
         })
     }
-    // importantItem = (id) =>{
-    //     this.setState(({todolist}) => {
-    //         todolist.forEach(el => {if(el.id === id){
-    //             el.important = !el.important;
-    //             console.log(el)
-    //             }
-    //         })
-    //     })
-    // }
+    onSearchChange = (term) => {
+        this.setState({term});
+    }
+    onFilterChange = (filter) => {
+        this.setState({filter});
+    }
+
+    search(items,term){
+        if(term.length === 0){
+            return items;
+        }
+        return items.filter((item) => {
+            return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
+        })
+    }
+    filter(items, filter){
+        switch(filter){
+            case 'all':
+                return items;
+            case 'active':
+                return items.filter((item) => !item.done);
+            case 'done':
+                return items.filter((item) => item.done);
+            default:
+                return items;
+        }
+    }
     render(){
-        const doneCount = this.state.todolist.filter((item) => item.done).length;
-        const todoCount = this.state.todolist.length - doneCount;
+        const {todolist, term, filter} = this.state;
+
+        const visibleItems = this.filter(this.search(todolist,term),filter)
+        const doneCount = todolist.filter((item) => item.done).length;
+        const todoCount = todolist.length - doneCount;
         return(
             <div className="Application">
                 <AppHeader toDo = {todoCount} done = {doneCount}/>
                 <div className="filter-block">
-                    <SearchPanel />
-                    <ItemStatusFilter />
+                    <SearchPanel onSearchChange = {this.onSearchChange}/>
+                    <ItemStatusFilter 
+                        filter = {filter}
+                        onFilterChange = {this.onFilterChange}
+                    />
                 </div>
-                <TodoList todos = {this.state.todolist} 
+                <TodoList todos = {visibleItems} 
                         onDeleted = {this.deleteItem} 
                         onToggleDone = {this.onToggleDone}
                         onToggleImportant = {this.onToggleImportant}
-                        // onImportant = {this.importantItem}
                         />
                 <AddItemPanel onItemAdded = {this.addItem}/>
             </div>
