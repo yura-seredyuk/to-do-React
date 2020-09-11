@@ -15,8 +15,8 @@ export default class App extends Component{
     state = {
         todolist:[
             this.createTodoItem('Drink Coffee','2020-09-15T13:00'),
-            this.createTodoItem('Build React App','2020-09-15T13:00'),
-            this.createTodoItem('Drink Tea','2020-09-15T13:00')
+            this.createTodoItem('Build React App','2020-09-13T13:00'),
+            this.createTodoItem('Drink Tea','2020-09-11T13:00')
         ],
         term:'',
         filter:'all'
@@ -24,9 +24,10 @@ export default class App extends Component{
     createTodoItem(label,deadline){
         return{
             label,
+            deadline,
             important:false,
             id:this.maxId++,
-            deadline
+            timer:0
         }
     }
     deleteItem = (id) => {
@@ -41,9 +42,9 @@ export default class App extends Component{
             }
         })
     }
-    addItem = (text) =>{
+    addItem = (text,date) =>{
         //generate id
-        const newItem = this.createTodoItem(text,'2020-09-15T13:00') 
+        const newItem = this.createTodoItem(text,date) 
          // new Array
         this.setState(({ todolist }) =>{
             const newArray = [
@@ -103,6 +104,19 @@ export default class App extends Component{
             default:
                 return items;
         }
+    }
+  
+    componentDidMount(){
+
+        setInterval(()=>{
+            this.state.todolist.map(el => {
+                const rez = Math.ceil((new Date(el.deadline) - new Date())/86400000) 
+               el.timer = rez
+               console.log(this.state.todolist)
+            })
+            console.log(this.state.todolist)
+
+        },6000)
     }
     render(){
         const {todolist, term, filter} = this.state;

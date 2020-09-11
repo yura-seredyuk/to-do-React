@@ -4,18 +4,25 @@ import './add-item-panel.css';
 
 export default class AddItemPanel extends Component{
     state = {
-        label:''
+        label:'',
+        date:new Date().toISOString().substr(0, 16)
     }
     onLabelChange = (e) => {
         this.setState({
             label:e.target.value
         })
     }
+    onDateChange = (e) => {
+        this.setState({
+            date: e.target.value
+        })
+    } 
     onSubmit = (e) =>{
         e.preventDefault();
-        this.props.onItemAdded(this.state.label);
+        if (this.state.label) this.props.onItemAdded(this.state.label,this.state.date);
         this.setState({
-            label:''
+            label:'',
+            date:new Date().toISOString().substr(0, 16)
         })
     }
     render(){
@@ -39,6 +46,8 @@ export default class AddItemPanel extends Component{
                     type = 'datetime-local'
                     className = 'date-input form-control'
                     min = {today}
+                    onChange = {this.onDateChange}
+                    value = {this.state.date}
                 />
                 <button 
                     onClick={()=>this.props.onItemAdded}
